@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SSRS_WIXInstaller", "SSRS_WIXInstaller\SSRS_WIXInstaller.wixproj", "{09DAA84B-38CE-4290-9ACE-0F82F775DA46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		DebugLocal|Any CPU = DebugLocal|Any CPU
+		DebugLocal|x86 = DebugLocal|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.Debug|x86.ActiveCfg = Debug|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.Debug|x86.Build.0 = Debug|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.DebugLocal|Any CPU.ActiveCfg = Release|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.DebugLocal|Any CPU.Build.0 = Release|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.DebugLocal|x86.ActiveCfg = Debug|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.DebugLocal|x86.Build.0 = Debug|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.Release|Any CPU.ActiveCfg = Release|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.Release|x86.ActiveCfg = Release|x86
+		{09DAA84B-38CE-4290-9ACE-0F82F775DA46}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!--custom properties-->
+  <?define ProductName="MyReportsInstaller" ?>
+  <?define CompanyName="MyOrg" ?>
+  <?define ProductVersion="1.0.0.0" ?>
+
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyName)" UpgradeCode="ff634ea7-6d50-473d-9fbc-d6f59b973aa2">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes"/>
+
+    <!-- Product Prerequisites -->
+    <Condition Message="An administrator must approve or install [ProductName].">
+      Privileged
+    </Condition>
+
+    <!-- Feature/Component Prerequisites -->
+    <Condition Message="[ProductName] is only supported on Windows Vista, Windows Server 2008, or higher.">
+      <![CDATA[Installed Or (VersionNT >= 601)]]>
+    </Condition>
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="ProductComponent" Guid="2e9a4e92-7d75-456c-a0ba-7d674fedfc9f">
+        <File Id="ReportScript" Name="ReportingScript.rss" Source=".\RSS Scripts\ReportingScript.rss" KeyPath="yes" Vital="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <CustomAction Id="ConfigureReport_Cmd" Property="ConfigureReport" Value="&quot;rs.exe&quot; -i &quot;[INSTALLFOLDER]\ReportingScript.rss&quot; -s [REPORTSERVERURL] -v ReportFolder=&quot;[ROOTFOLDER]/schedulable&quot; -v DataSetFolder=&quot;[ROOTFOLDER]/datasets&quot; -v DataSourceFolder=&quot;[ROOTFOLDER]/datasources&quot; -v ReportName=&quot;&quot; -v DatasourcePath=&quot;[ROOTFOLDER]/datasources&quot; -v filePath=&quot;[INSTALLFOLDER]/&quot; -v DatabaseServer=&quot;[DATABASESERVER]&quot; -e Mgmt2010" Execute="immediate" />
+    <CustomAction Id="ConfigureReport" BinaryKey="WixCA"  DllEntry="CAQuietExec" Execute="deferred" Return="check" Impersonate="yes"  />
+
+    <InstallExecuteSequence>
+      <Custom Action="ConfigureReport_Cmd" After="MsiConfigureServices">
+        <![CDATA[((REINSTALL OR NOT Installed) OR (Installed AND ProductState=5 AND NOT REMOVE))]]>
+      </Custom>
+      <Custom Action="ConfigureReport" After="ConfigureReport_Cmd">
+        <![CDATA[((REINSTALL OR NOT Installed) OR (Installed AND ProductState=5 AND NOT REMOVE))]]>
+      </Custom>
+    </InstallExecuteSequence>
+
+    <Feature Id="ProductFeature" Title="$(var.ProductName)" Level="1">
+      <ComponentRef Id="ProductComponent"/>
+      <ComponentGroupRef Id="ReportFiles" />
+    </Feature>
+	</Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="MyReports" />
+      </Directory>
+    </Directory>
+  </Fragment>
+</Wix>
