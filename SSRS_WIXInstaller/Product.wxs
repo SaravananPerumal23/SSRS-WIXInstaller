@@ -6,7 +6,8 @@
   <?define CompanyName="MyOrg" ?>
   <?define ProductVersion="1.0.0.0" ?>
 
-	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyName)" UpgradeCode="ff634ea7-6d50-473d-9fbc-d6f59b973aa2">
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyName)"
+    UpgradeCode="ff634ea7-6d50-473d-9fbc-d6f59b973aa2">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -28,7 +29,11 @@
       </Component>
     </DirectoryRef>
 
-    <CustomAction Id="ConfigureReport_Cmd" Property="ConfigureReport" Value="&quot;rs.exe&quot; -i &quot;[INSTALLFOLDER]\ReportingScript.rss&quot; -s [REPORTSERVERURL] -v ReportFolder=&quot;[ROOTFOLDER]/reports&quot; -v DataSetFolder=&quot;[ROOTFOLDER]/datasets&quot; -v DataSourceFolder=&quot;[ROOTFOLDER]/datasources&quot; -v ReportName=&quot;&quot; -v DatasourcePath=&quot;[ROOTFOLDER]/datasources&quot; -v filePath=&quot;[INSTALLFOLDER]/&quot; -v DatabaseServer=&quot;[DATABASESERVER]&quot; -e Mgmt2010" Execute="immediate" />
+    <CustomAction Id="ConfigureReport_Cmd" Property="ConfigureReport" Value="&quot;rs.exe&quot; -i &quot;[INSTALLFOLDER]\ReportingScript.rss&quot;
+      -s [REPORTSERVERURL] -v ReportFolder=&quot;[ROOTFOLDER]/reports&quot; -v DataSetFolder=&quot;[ROOTFOLDER]/datasets&quot;
+      -v DataSourceFolder=&quot;[ROOTFOLDER]/datasources&quot; -v ReportName=&quot;&quot;
+      -v DatasourcePath=&quot;[ROOTFOLDER]/datasources&quot; -v filePath=&quot;[INSTALLFOLDER]/&quot;
+      -v DatabaseServer=&quot;[DATABASESERVER]&quot; -e Mgmt2010" Execute="immediate" />
     <CustomAction Id="ConfigureReport" BinaryKey="WixCA"  DllEntry="CAQuietExec" Execute="deferred" Return="check" Impersonate="yes"  />
 
     <InstallExecuteSequence>
